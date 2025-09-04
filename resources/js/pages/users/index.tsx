@@ -10,7 +10,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { DataTable } from './data-table';
-import { getColumns } from './column';
+import { getColumns, User } from './column';
+import { FilterOptions } from './data-table-toolbar';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -19,14 +20,30 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 const openDeleteDialog = () => { }
+interface Department {
+    id: number;
+    name: string;
+}
 
-export default function Users({ users, departments, groups }: { users: Array<any>, departments: Array<any>, groups: Array<any> }) {
+interface Group {
+    id: number;
+    name: string;
+}
+
+interface UsersPageProps {
+    users: User[];
+    departments: Department[];
+    groups: Group[];
+    filterOptions: FilterOptions;
+}
+
+export default function Users({ users, filterOptions }: UsersPageProps) {
 
     const columns = getColumns({ onDelete: openDeleteDialog });
     // const isAdmin = useAuth().isAdmin();
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Posts" />
+            <Head title="Users" />
            
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
                 {/* {isAdmin && <h1>u admin</h1>} */}
@@ -38,7 +55,7 @@ export default function Users({ users, departments, groups }: { users: Array<any
                         </TabsList>
                         <TabsContent value="members">
                             <div className='w-full'>
-                                <DataTable data={users} columns={columns} />
+                                <DataTable data={users} columns={columns} filterOptions={filterOptions} />
                             </div>
                         </TabsContent>
                         <TabsContent value="groups">

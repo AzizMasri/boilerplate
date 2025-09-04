@@ -10,18 +10,26 @@ import { Input } from "@/components/ui/input"
 import { DataTableFacetedFilter } from "../../components/custom/data-table-faceted-filter"
 import { DataTableViewOptions } from "@/components/data-table-toggle"
 
+export type FilterOption = {
+    value: string
+    label: string
+}
+
+export type FilterOptions = {
+    departments: FilterOption[]
+    groups: FilterOption[]
+    roles: FilterOption[]
+}
 
 interface DataTableToolbarProps<TData> {
     table: Table<TData>
+    filterOptions: FilterOptions
 }
 
-const roleOptions = [
-    { value: "admin", label: "Admin" },
-    { value: "user", label: "User" },
-];
 
 export function DataTableToolbar<TData>({
     table,
+    filterOptions
 }: DataTableToolbarProps<TData>) {
     const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -43,21 +51,21 @@ export function DataTableToolbar<TData>({
                     <DataTableFacetedFilter
                         column={table.getColumn("role")}
                         title="Role"
-                        options={roleOptions}
+                        options={filterOptions.roles}
                     />
                 )}
                 {table.getColumn("department") && (
                     <DataTableFacetedFilter
                         column={table.getColumn("department")}
                         title="Department"
-                        options={[]}
+                        options={filterOptions.departments}
                     />
                 )}
                 {table.getColumn("group") && (
                     <DataTableFacetedFilter
                         column={table.getColumn("group")}
                         title="Group"
-                        options={[]}
+                        options={filterOptions.groups}
                     />
                 )}
 

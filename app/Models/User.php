@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'group_id',
         'department_id',
+        'profile_path'
     ];
 
     /**

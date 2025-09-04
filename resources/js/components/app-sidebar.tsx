@@ -26,8 +26,8 @@ const settingsNavItems: NavItem[] = [
         icon: User2,
     },
     {
-        title: 'Profile',
-        href: '/settings/profile',
+        title: 'Role & Permissions',
+        href: '/settings/role-permissions',
         icon: User,
     },
     {

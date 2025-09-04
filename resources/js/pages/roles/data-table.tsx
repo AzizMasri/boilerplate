@@ -25,21 +25,17 @@ import {
 } from "@/components/ui/table"
 import { DataTablePagination } from "@/components/pagination"
 import React, { useState } from "react"
-import { DataTableToolbar, FilterOptions } from "./data-table-toolbar"
-//import { DataTableToolbar } from "./data-table-toolbar"
+// import { DataTableToolbar } from "./data-table-toolbar"
 
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
-    filterOptions: FilterOptions
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
-    filterOptions,
-
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -76,10 +72,6 @@ export function DataTable<TData, TValue>({
 
     return (
         <div className="">
-           
-            <div className="py-4">
-                <DataTableToolbar table={table} filterOptions={filterOptions} />
-            </div>
 
             <div className="overflow-hidden rounded-md border">
                 <Table>
